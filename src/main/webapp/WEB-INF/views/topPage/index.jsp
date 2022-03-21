@@ -11,7 +11,6 @@
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commNew" value="${ForwardConst.CMD_NEW.getValue()}" />
 
-
 <c:import url="../layout/app.jsp">
     <c:param name="content">
         <c:if test="${flush != null}">
@@ -29,7 +28,7 @@
                     <th class="report_title">タイトル</th>
                     <th class="report_action">操作</th>
                 </tr>
-                                <c:forEach var="report" items="${reports}" varStatus="status">
+                <c:forEach var="report" items="${reports}" varStatus="status">
                     <fmt:parseDate value="${report.reportDate}" pattern="yyyy-MM-dd" var="reportDay" type="date" />
                     <tr class="row${status.count % 2}">
                         <td class="report_name"><c:out value="${report.employee.name}" /></td>
@@ -41,19 +40,19 @@
             </tbody>
         </table>
 
-            <div id="pagination">
-                （全 ${reports_count} 件）<br />
-                <c:forEach var="i" begin="1" end="${((reports_count - 1) / maxRow) + 1}" step="1">
-                    <c:choose>
-                        <c:when test="${i == page}">
-                            <c:out value="${i}" />&nbsp;
-                         </c:when>
-                        <c:otherwise>
-                             <a href="<c:url value='?action=${actTop}&command=${commIdx}&page=${i}' />"><c:out value="${i}" /></a>&nbsp;
-                        </c:otherwise>
-                    </c:choose>
-                </c:forEach>
-            </div>
-            <p><a href="<c:url value='?action=${actRep}&command=${commNew}' />">新規日報の登録</a></p>
+        <div id="pagination">
+            （全 ${reports_count} 件）<br />
+            <c:forEach var="i" begin="1" end="${((reports_count - 1) / maxRow) + 1}" step="1">
+                <c:choose>
+                    <c:when test="${i == page}">
+                        <c:out value="${i}" />&nbsp;
+                    </c:when>
+                    <c:otherwise>
+                        <a href="<c:url value='?action=${actTop}&command=${commIdx}&page=${i}' />"><c:out value="${i}" /></a>&nbsp;
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </div>
+        <p><a href="<c:url value='?action=${actRep}&command=${commNew}' />">新規日報の登録</a></p>
     </c:param>
 </c:import>
